@@ -12,6 +12,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         // hi cleo, kamusta kau ken G? hehe
+        //haan kam agsarsaritan ngem mamiss ko latta suna.....nuh dadduma. Sikayo ngay?
 
 
     }
