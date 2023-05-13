@@ -13,7 +13,7 @@ public class MainActivity extends AppCompatActivity {
 
         // hi cleo, kamusta kau ken G? hehe
         //haan kam agsarsaritan ngem mamiss ko latta suna.....nuh dadduma. Sikayo ngay?
-
+        // aray ko po, ngem same... last idi ejy order
 
     }
 }
