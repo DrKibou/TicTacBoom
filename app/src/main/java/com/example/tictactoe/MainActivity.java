@@ -17,5 +17,6 @@ public class MainActivity extends AppCompatActivity {
         //atleast recent knyayo sikami 3 weeks ago HAHAHAHA
         //changed home
         //yeah
+        // added vsAi activity
     }
 }
