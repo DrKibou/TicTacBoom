@@ -29,13 +29,15 @@ public class Home extends AppCompatActivity {
         aiBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                openAi();
             }
         });
     }
 
     public void openAi(){
-        Intent intent = new Intent();
+        Intent intent = new Intent(this, VsAI.class);
+        startActivity(intent);
+        finish();
     }
     public void openMulti(){
         Intent intent = new Intent();
