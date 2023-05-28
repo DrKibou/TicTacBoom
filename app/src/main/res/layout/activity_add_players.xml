@@ -54,13 +54,14 @@
         android:id="@+id/startBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="272dp"
+        android:layout_marginTop="32dp"
         android:text="Start"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/plyrTwo" />
+        app:layout_constraintTop_toBottomOf="@+id/plyrTwo"
+        app:layout_constraintVertical_bias="0.189" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
