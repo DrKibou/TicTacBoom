@@ -3,6 +3,7 @@ package com.example.tictactoe.VsPlayer;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.media.Image;
 import android.os.Bundle;
 import android.view.View;
@@ -26,21 +27,26 @@ public class VsPlayer extends AppCompatActivity {
 
     List<int[]> combinations = new ArrayList<>();
     int [] boxpos = {0,0,0,0,0,0,0,0,0};
+    boolean isGameActive = true;
 
     int playerTurn = 1;
     int totalSelectedBox = 1;
 
 
+    // check if tile is empty or not
     public boolean isBoxNotEmpty(int boxPosition){
 
         boolean result = false;
 
         if(boxpos[boxPosition] == 0){
             result = true;
+        } else {
+            isGameActive = false;
         }
 
         return result;
     }
+
 
     public void performAction(ImageView imageView, int selectedboxPos){
 
@@ -84,6 +90,7 @@ public class VsPlayer extends AppCompatActivity {
                     boxpos[combi[1]] == playerTurn &&
                     boxpos[combi[2]] == playerTurn){
                 result = true;
+                isGameActive =false;
             }
         }
         return result;
@@ -93,11 +100,11 @@ public class VsPlayer extends AppCompatActivity {
             playerTurn = currentPlayerPos;
 
             if (playerTurn == 1){
-                playerOneName.setBackgroundResource(R.color.purple_200);
-                playerTwoName.setBackgroundResource(R.color.white);
+                playerOneName.setTypeface(null, Typeface.BOLD);
+                playerTwoName.setTypeface(null, Typeface.NORMAL);
             } else {
-                playerTwoName.setBackgroundResource(R.color.purple_200);
-                playerOneName.setBackgroundResource(R.color.white);
+                playerTwoName.setTypeface(null, Typeface.BOLD);
+                playerOneName.setTypeface(null, Typeface.NORMAL);
             }
     }
 
@@ -106,8 +113,8 @@ public class VsPlayer extends AppCompatActivity {
         playerTurn = 1;
         totalSelectedBox = 1;
         txtWinner.setText(" ");
-        playerOneName.setBackgroundResource(R.color.purple_500);
-        playerTwoName.setBackgroundResource(R.color.white);
+        playerOneName.setTypeface(null, Typeface.BOLD);
+        playerTwoName.setTypeface(null, Typeface.NORMAL);
 
 
         ((ImageView) findViewById(R.id.tile1)).setImageResource(0);
@@ -177,26 +184,35 @@ public class VsPlayer extends AppCompatActivity {
         tile1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(isBoxNotEmpty(0)){
+                if(isGameActive){
+                    if(isBoxNotEmpty(0)){
                         performAction((ImageView) v, 0);
+                    }
                 }
+
 
             }
         });
         tile2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(isBoxNotEmpty(1)){
-                    performAction((ImageView) v, 1);
+                if(isGameActive){
+                    if(isBoxNotEmpty(1)){
+                        performAction((ImageView) v, 1);
+                    }
                 }
+
 
             }
         });
         tile3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(isBoxNotEmpty(2)){
-                    performAction((ImageView) v, 2);
+                if(isGameActive){
+                    if(isBoxNotEmpty(2)){
+                        performAction((ImageView) v, 2);
+                    }
+
                 }
 
             }
@@ -204,34 +220,45 @@ public class VsPlayer extends AppCompatActivity {
         tile4.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(isBoxNotEmpty(3)){
-                    performAction((ImageView) v, 3);
+                if(isGameActive){
+                    if(isBoxNotEmpty(3)){
+                        performAction((ImageView) v, 3);
+                    }
                 }
+
 
             }
         });
         tile5.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(isBoxNotEmpty(4)){
-                    performAction((ImageView) v, 4);
+                if(isGameActive){
+                    if(isBoxNotEmpty(4)){
+                        performAction((ImageView) v, 4);
+                    }
                 }
+
 
             }
         });
         tile6.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(isBoxNotEmpty(5)){
-                    performAction((ImageView) v, 5);
+                if(isGameActive){
+                    if(isBoxNotEmpty(5)){
+                        performAction((ImageView) v, 5);
+                    }
                 }
+
             }
         });
         tile7.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(isBoxNotEmpty(6)){
-                    performAction((ImageView) v, 6);
+                if(isGameActive){
+                    if(isBoxNotEmpty(6)){
+                        performAction((ImageView) v, 6);
+                    }
                 }
 
             }
@@ -239,18 +266,24 @@ public class VsPlayer extends AppCompatActivity {
         tile8.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(isBoxNotEmpty(7)){
-                    performAction((ImageView) v, 7);
+                if(isGameActive){
+                    if(isBoxNotEmpty(7)){
+                        performAction((ImageView) v, 7);
+                    }
                 }
+
 
             }
         });
         tile9.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(isBoxNotEmpty(8)){
-                    performAction((ImageView) v, 8);
+                if(isGameActive){
+                    if(isBoxNotEmpty(8)){
+                        performAction((ImageView) v, 8);
+                    }
                 }
+
 
             }
         });

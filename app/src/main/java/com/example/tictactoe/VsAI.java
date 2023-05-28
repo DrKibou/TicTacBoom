@@ -39,7 +39,7 @@ public class VsAI extends AppCompatActivity {
         ((ImageView) findViewById(R.id.tile9)).setImageResource(0);
 
         TextView status = findViewById(R.id.txtCurrentTurn);
-        status.setText("X's Turn");
+        status.setText("");
     }
 
     // check board if there's a winner
