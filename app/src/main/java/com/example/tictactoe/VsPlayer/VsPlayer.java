@@ -96,7 +96,7 @@ public class VsPlayer extends AppCompatActivity {
         return result;
     }
 
-    public void changeTurn( int currentPlayerPos){
+    public void changeTurn(int currentPlayerPos){
             playerTurn = currentPlayerPos;
 
             if (playerTurn == 1){
