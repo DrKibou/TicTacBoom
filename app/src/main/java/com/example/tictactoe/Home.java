@@ -7,6 +7,8 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
+import com.example.tictactoe.VsPlayer.AddPlayers;
+
 public class Home extends AppCompatActivity {
 
     Button mpBtn, aiBtn;
@@ -22,7 +24,7 @@ public class Home extends AppCompatActivity {
         mpBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+            openMulti();
             }
         });
 
@@ -38,7 +40,9 @@ public class Home extends AppCompatActivity {
         Intent intent = new Intent();
     }
     public void openMulti(){
-        Intent intent = new Intent();
+        Intent intent = new Intent(getApplicationContext(), AddPlayers.class);
+        startActivity(intent);
+        finish();
     }
 
 }
