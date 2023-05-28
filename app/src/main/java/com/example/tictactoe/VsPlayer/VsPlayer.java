@@ -115,7 +115,7 @@ public class VsPlayer extends AppCompatActivity {
         txtWinner.setText(" ");
         playerOneName.setTypeface(null, Typeface.BOLD);
         playerTwoName.setTypeface(null, Typeface.NORMAL);
-
+        isGameActive = true;
 
         ((ImageView) findViewById(R.id.tile1)).setImageResource(0);
         ((ImageView) findViewById(R.id.tile2)).setImageResource(0);
