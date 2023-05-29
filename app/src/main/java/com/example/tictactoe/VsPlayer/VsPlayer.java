@@ -16,21 +16,29 @@ import com.example.tictactoe.R;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 public class VsPlayer extends AppCompatActivity {
 
     ImageView tile1, tile2, tile3, tile4, tile5, tile6, tile7, tile8, tile9;
 
-    Button btnBack, btnReset;
+    Button btnBack, btnReset, btnNewGame;
 
-    TextView playerOneName, playerTwoName, txtWinner;
+    TextView playerOneName, playerTwoName, txtWinner, scorep1, scorep2;
 
     List<int[]> combinations = new ArrayList<>();
-    int [] boxpos = {0,0,0,0,0,0,0,0,0};
+    int [] boxpos = {  0,0,0,
+                        0,0,0,
+                        0,0,0};
     boolean isGameActive = true;
 
     int playerTurn = 1;
     int totalSelectedBox = 1;
+    int scoreCounter1 = 0;
+    int scoreCounter2 = 0;
+    Random random;
+    List<Integer> explodingTiles = new ArrayList<>();
+
 
 
     // check if tile is empty or not
@@ -50,33 +58,66 @@ public class VsPlayer extends AppCompatActivity {
 
     public void performAction(ImageView imageView, int selectedboxPos){
 
-        boxpos[selectedboxPos] = playerTurn;
+        if (explodingTiles.contains(selectedboxPos)) {
 
-        if (playerTurn == 1) {
-            imageView.setImageResource(R.drawable.x);
-
-            if (checkWinner()){
-                txtWinner.setText(playerOneName.getText().toString() + " " + "has won");
-            } else if (totalSelectedBox == 9){
-                txtWinner.setText("Draw");
-            } else {
+            // this will explode the tile
+            imageView.setImageResource(R.drawable.explosion);
+            if (playerTurn == 1){
                 changeTurn(2);
                 totalSelectedBox++;
-            }
-        } else {
-            imageView.setImageResource(R.drawable.o);
-
-            if (checkWinner()){
-                txtWinner.setText(playerTwoName.getText().toString() + " " + "has won");
-            } else if (totalSelectedBox == 9){
-                txtWinner.setText("Draw");
-            }
-            else {
+                if(totalSelectedBox == 10){
+                    txtWinner.setText("Draw");
+                    isGameActive = false;
+                }
+            } else if (playerTurn == 2){
                 changeTurn(1);
                 totalSelectedBox++;
+                if(totalSelectedBox == 10){
+                    txtWinner.setText("Draw");
+                    isGameActive = false;
+                }
+            }
+        } else {
+
+            boxpos[selectedboxPos] = playerTurn;
+
+            if (playerTurn == 1) {
+                imageView.setImageResource(R.drawable.x);
+                if (checkWinner()) {
+                    txtWinner.setText(playerOneName.getText().toString() + " " + "has won");
+                    scoreCounter1++;
+                    scorep1.setText("Score " +scoreCounter1);
+                    if(scoreCounter1 == 5){
+                        txtWinner.setText(playerOneName.getText().toString() + "Your are the Winner!");
+                    }
+                    isGameActive = false;
+                } else if (totalSelectedBox == 9) {
+                    txtWinner.setText("Draw");
+                    isGameActive = false;
+                } else {
+                    changeTurn(2);
+                    totalSelectedBox++;
+                }
+            } else {
+                imageView.setImageResource(R.drawable.o);
+
+                if (checkWinner()) {
+                    txtWinner.setText(playerTwoName.getText().toString() + " " + "has won");
+                    scoreCounter2++;
+                    scorep2.setText("Score " +scoreCounter2);
+                    if (scoreCounter2 == 5){
+                        txtWinner.setText(playerTwoName.getText().toString() + "Your are the Winner!");
+                    }
+                    isGameActive = false;
+                } else if (totalSelectedBox == 9) {
+                    txtWinner.setText("Draw");
+                    isGameActive = false;
+                } else {
+                    changeTurn(1);
+                    totalSelectedBox++;
+                }
             }
         }
-
     }
 
     public boolean checkWinner(){
@@ -84,13 +125,14 @@ public class VsPlayer extends AppCompatActivity {
 
         for (int i = 0; i < combinations.size();i++){
 
+            //it will get the index and check if the playerTurn is present at those indexes (combinations)
             int [] combi = combinations.get(i);
 
             if(boxpos[combi[0]] == playerTurn &&
                     boxpos[combi[1]] == playerTurn &&
                     boxpos[combi[2]] == playerTurn){
                 result = true;
-                isGameActive =false;
+                isGameActive = false;
             }
         }
         return result;
@@ -107,8 +149,7 @@ public class VsPlayer extends AppCompatActivity {
                 playerOneName.setTypeface(null, Typeface.NORMAL);
             }
     }
-
-    public void newGame(){
+    public void resetGame(){
         boxpos = new int[] {0,0,0,0,0,0,0,0,0};
         playerTurn = 1;
         totalSelectedBox = 1;
@@ -116,6 +157,50 @@ public class VsPlayer extends AppCompatActivity {
         playerOneName.setTypeface(null, Typeface.BOLD);
         playerTwoName.setTypeface(null, Typeface.NORMAL);
         isGameActive = true;
+
+        //this will create a two random tile
+        random = new Random();
+        explodingTiles.clear();
+        while (explodingTiles.size() < 2) {
+            int tile = random.nextInt(9);
+            if (!explodingTiles.contains(tile)) {
+                explodingTiles.add(tile);
+            }
+        }
+
+        ((ImageView) findViewById(R.id.tile1)).setImageResource(0);
+        ((ImageView) findViewById(R.id.tile2)).setImageResource(0);
+        ((ImageView) findViewById(R.id.tile3)).setImageResource(0);
+        ((ImageView) findViewById(R.id.tile4)).setImageResource(0);
+        ((ImageView) findViewById(R.id.tile5)).setImageResource(0);
+        ((ImageView) findViewById(R.id.tile6)).setImageResource(0);
+        ((ImageView) findViewById(R.id.tile7)).setImageResource(0);
+        ((ImageView) findViewById(R.id.tile8)).setImageResource(0);
+        ((ImageView) findViewById(R.id.tile9)).setImageResource(0);
+    }
+
+    public void newGame(){
+        boxpos = new int[] {0,0,0,0,0,0,0,0,0};
+        playerTurn = 1;
+        totalSelectedBox = 1;
+        scoreCounter2 = 0;
+        scoreCounter1 = 0;
+        txtWinner.setText(" ");
+        playerOneName.setTypeface(null, Typeface.BOLD);
+        playerTwoName.setTypeface(null, Typeface.NORMAL);
+        isGameActive = true;
+
+        scorep1.setText("Score");
+        scorep2.setText("Score");
+        //this will create a two random tile
+        random = new Random();
+        explodingTiles.clear();
+        while (explodingTiles.size() < 2) {
+            int tile = random.nextInt(9);
+            if (!explodingTiles.contains(tile)) {
+                explodingTiles.add(tile);
+            }
+        }
 
         ((ImageView) findViewById(R.id.tile1)).setImageResource(0);
         ((ImageView) findViewById(R.id.tile2)).setImageResource(0);
@@ -138,6 +223,9 @@ public class VsPlayer extends AppCompatActivity {
         txtWinner = findViewById(R.id.txtWinner);
         btnBack = findViewById(R.id.btnBack);
         btnReset = findViewById(R.id.btnReset);
+        scorep1 = findViewById(R.id.score1);
+        scorep2 = findViewById(R.id.score2);
+        btnNewGame = findViewById(R.id.btnNewGame);
 
 
         tile1 = findViewById(R.id.tile1);
@@ -165,7 +253,15 @@ public class VsPlayer extends AppCompatActivity {
         playerOneName.setText(p1N);
         playerTwoName.setText(p2N);
 
-        newGame();
+        resetGame();
+
+        btnNewGame.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                newGame();
+            }
+        });
+
         btnBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -178,7 +274,7 @@ public class VsPlayer extends AppCompatActivity {
         btnReset.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                newGame();
+                resetGame();
             }
         });
         tile1.setOnClickListener(new View.OnClickListener() {
@@ -283,8 +379,6 @@ public class VsPlayer extends AppCompatActivity {
                         performAction((ImageView) v, 8);
                     }
                 }
-
-
             }
         });
     }
