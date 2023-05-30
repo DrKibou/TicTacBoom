@@ -10,6 +10,7 @@ import android.media.Image;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -25,7 +26,8 @@ public class VsPlayer extends AppCompatActivity {
 
     ImageView tile1, tile2, tile3, tile4, tile5, tile6, tile7, tile8, tile9;
 
-    Button btnBack, btnReset, btnNewGame;
+    Button btnReset, btnNewGame;
+    ImageButton btnBack;
 
     TextView playerOneName, playerTwoName, txtWinner, scorep1, scorep2, p1Life, p2Life;
 
@@ -64,77 +66,81 @@ public class VsPlayer extends AppCompatActivity {
     public void performAction(ImageView imageView, int selectedboxPos){
 
         if (explodingTiles.contains(selectedboxPos)) {
-
             // this will explode the tile
+
             imageView.setImageResource(R.drawable.bomb);
             if (playerTurn == 1){
-                p1.setHp(p1.getHp()-1);
-                p1Life.setText("HP: " + p1.getHp());
-                changeTurn(2);
-                totalSelectedBox++;
-                if(totalSelectedBox == 10){
-                    txtWinner.setText("Draw");
-                    isGameActive = false;
+                    p1.setHp(p1.getHp() - 1);
+                    p1Life.setText("HP: " + p1.getHp());
+                    changeTurn(2);
+                    totalSelectedBox++;
+                    if (totalSelectedBox == 10) {
+                        txtWinner.setText("Draw");
+                        isGameActive = false;
                 }
             } else if (playerTurn == 2){
-                p2.setHp(p2.getHp()-1);
-                p2Life.setText("HP: " + p2.getHp());
-                changeTurn(1);
-                totalSelectedBox++;
-                if(totalSelectedBox == 10){
-                    txtWinner.setText("Draw");
-                    isGameActive = false;
-                }
+                    p2.setHp(p2.getHp() - 1);
+                    p2Life.setText("HP: " + p2.getHp());
+                    changeTurn(1);
+                    totalSelectedBox++;
+                    if (totalSelectedBox == 10) {
+                        txtWinner.setText("Draw");
+                        isGameActive = false;
+                    }
             }
         } else {
             boxpos[selectedboxPos] = playerTurn;
 
             if (playerTurn == 1) {
-                imageView.setImageResource(R.drawable.x_colored);
                 if (checkWinner()) {
-                    txtWinner.setText(playerOneName.getText().toString() + " " + "has won");
+                    imageView.setImageResource(R.drawable.x_colored);
+                    txtWinner.setText(playerOneName.getText().toString() + " " + "has won!");
                     scoreCounter1++;
-                    scorep1.setText("Score " +scoreCounter1);
+                    scorep1.setText("Score:" + " " + scoreCounter1);
                     Toast.makeText(this, "Tap 'Reset' to begin next match.", Toast.LENGTH_SHORT).show();
                     if(scoreCounter1 == 3){
-                        txtWinner.setText(playerOneName.getText().toString() + "Your are the Winner!");
+                        txtWinner.setText(playerOneName.getText().toString() + "! " + "Your are the Winner!");
                         Toast.makeText(this, "Tap 'NEW GAME' to begin New Game.", Toast.LENGTH_SHORT).show();
                         btnReset.setEnabled(false);
                     } else if(p2.getHp()==0){
-                        txtWinner.setText(playerOneName.getText().toString() + "Your are the Winner!");
+                        txtWinner.setText(playerOneName.getText().toString() + "! " +"Your are the Winner!");
                         Toast.makeText(this, "Tap 'NEW GAME' to begin New Game.", Toast.LENGTH_SHORT).show();
                         btnReset.setEnabled(false);
                     }
                     isGameActive = false;
                 } else if (totalSelectedBox == 9) {
+                    imageView.setImageResource(R.drawable.x_colored);
                     txtWinner.setText("Draw");
                     isGameActive = false;
                 } else {
+                    imageView.setImageResource(R.drawable.x_colored);
                     changeTurn(2);
                     totalSelectedBox++;
                 }
             } else {
-                imageView.setImageResource(R.drawable.o_colored);
 
                 if (checkWinner()) {
+                    imageView.setImageResource(R.drawable.o_colored);
                     txtWinner.setText(playerTwoName.getText().toString() + " " + "has won");
                     scoreCounter2++;
-                    scorep2.setText("Score " +scoreCounter2);
+                    scorep2.setText("Score:" + " " +scoreCounter2);
                     Toast.makeText(this, "Tap 'Reset' to begin next match.", Toast.LENGTH_SHORT).show();
                     if (scoreCounter2 == 3){
-                        txtWinner.setText(playerTwoName.getText().toString() + "Your are the Winner!");
+                        txtWinner.setText(playerTwoName.getText().toString() + "! " + "Your are the Winner!");
                         Toast.makeText(this, "Tap 'NEW GAME' to begin New Game.", Toast.LENGTH_SHORT).show();
                         btnReset.setEnabled(false);
-                    } else if(p2.getHp()==0){
-                        txtWinner.setText(playerOneName.getText().toString() + "Your are the Winner!");
+                    } else if(p1.getHp()==0){
+                        txtWinner.setText(playerTwoName.getText().toString() + "! " + "Your are the Winner!");
                         Toast.makeText(this, "Tap 'NEW GAME' to begin New Game.", Toast.LENGTH_SHORT).show();
                         btnReset.setEnabled(false);
                     }
                     isGameActive = false;
                 } else if (totalSelectedBox == 9) {
+                    imageView.setImageResource(R.drawable.o_colored);
                     txtWinner.setText("Draw");
                     isGameActive = false;
                 } else {
+                    imageView.setImageResource(R.drawable.o_colored);
                     changeTurn(1);
                     totalSelectedBox++;
                 }
@@ -147,9 +153,11 @@ public class VsPlayer extends AppCompatActivity {
 
         if(p1.getHp() == 0){
             isGameActive = false;
+            btnReset.setEnabled(false);
             result = true;
         } else if(p2.getHp() == 0){
             isGameActive = false;
+            btnReset.setEnabled(false);
             result = true;
         }
 
@@ -259,8 +267,8 @@ public class VsPlayer extends AppCompatActivity {
         p2Life.setText("HP: " + p2.getHp());
         btnReset.setEnabled(true);
 
-        scorep1.setText("Score");
-        scorep2.setText("Score");
+        scorep1.setText("Score: 0");
+        scorep2.setText("Score: 0");
         //this will create a two random tile
         random = new Random();
         explodingTiles.clear();

@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.Toast;
 
 import com.example.tictactoe.Home;
@@ -16,7 +17,8 @@ import com.google.android.material.textfield.TextInputEditText;
 public class AddPlayers extends AppCompatActivity {
 
     TextInputEditText playerOne, playerTwo;
-    Button startBtn, backBtn;
+    Button startBtn;
+    ImageButton btnBack;
     String getPlayerOne, getPlayerTwo;
 
 
@@ -28,7 +30,7 @@ public class AddPlayers extends AppCompatActivity {
         playerOne = findViewById(R.id.plyrOne);
         playerTwo = findViewById(R.id.plyrTwo);
         startBtn = findViewById(R.id.startBtn);
-        backBtn = findViewById(R.id.backBtn);
+        btnBack = findViewById(R.id.backBtn);
 
 
         startBtn.setOnClickListener(new View.OnClickListener() {
@@ -45,7 +47,7 @@ public class AddPlayers extends AppCompatActivity {
             }
         });
 
-        backBtn.setOnClickListener(new View.OnClickListener() {
+        btnBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 openHome();

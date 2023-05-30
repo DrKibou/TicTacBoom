@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -13,7 +14,8 @@ public class VsAI extends AppCompatActivity {
 
     ImageView tile1, tile2, tile3, tile4, tile5, tile6, tile7, tile8, tile9;
     TextView txtCurrentTurn;
-    Button btnBack, btnReset;
+    Button btnReset;
+    ImageButton btnBack;
 
     char player = 'x';
     char computer = 'o';
@@ -350,7 +352,7 @@ public class VsAI extends AppCompatActivity {
 
         txtCurrentTurn = (TextView) findViewById(R.id.txtCurrentTurn);
 
-        btnBack = (Button) findViewById(R.id.btnBack);
+        btnBack = (ImageButton) findViewById(R.id.btnBack);
         btnReset = (Button) findViewById(R.id.btnReset);
 
         newGame();
