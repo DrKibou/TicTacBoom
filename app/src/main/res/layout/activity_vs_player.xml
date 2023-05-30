@@ -2,6 +2,7 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/p1HP"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".VsPlayer.VsPlayer">
@@ -11,6 +12,7 @@
         android:id="@+id/txtOne"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:padding="3dp"
         android:text="PlayerOne"
         android:textColor="#000000"
         android:textSize="20sp"
@@ -22,6 +24,7 @@
         android:id="@+id/txtTwo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:padding="3dp"
         android:text="PlayerTwo"
         android:textColor="#000000"
         android:textSize="20sp"
@@ -35,17 +38,16 @@
         android:id="@+id/txtWinner"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="170dp"
         android:fontFamily="sans-serif-black"
         android:text="test"
         android:textColor="#000000"
         android:textSize="34sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/cardView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.805" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/btnBack"
@@ -62,9 +64,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
-        android:layout_marginTop="200dp"
+        android:layout_marginTop="210dp"
         android:layout_marginEnd="32dp"
-        android:layout_marginBottom="170dp"
+        android:layout_marginBottom="180dp"
         app:cardBackgroundColor="#AFAFAF"
         app:cardCornerRadius="10dp"
         app:contentPadding="10dp"
@@ -260,24 +262,20 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Score"
-        app:layout_constraintBottom_toTopOf="@+id/txtWinner"
         app:layout_constraintEnd_toEndOf="@+id/txtOne"
         app:layout_constraintHorizontal_bias="0.484"
         app:layout_constraintStart_toStartOf="@+id/txtOne"
-        app:layout_constraintTop_toBottomOf="@+id/txtOne"
-        app:layout_constraintVertical_bias="0.25" />
+        app:layout_constraintTop_toBottomOf="@+id/txtOne" />
 
     <TextView
         android:id="@+id/score2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Score"
-        app:layout_constraintBottom_toTopOf="@+id/txtWinner"
         app:layout_constraintEnd_toEndOf="@+id/txtTwo"
         app:layout_constraintHorizontal_bias="0.527"
         app:layout_constraintStart_toStartOf="@+id/txtTwo"
-        app:layout_constraintTop_toBottomOf="@+id/txtTwo"
-        app:layout_constraintVertical_bias="0.25" />
+        app:layout_constraintTop_toBottomOf="@+id/txtTwo" />
 
     <Button
         android:id="@+id/btnNewGame"
@@ -290,5 +288,25 @@
         app:layout_constraintStart_toStartOf="@+id/btnReset"
         app:layout_constraintTop_toBottomOf="@+id/btnReset"
         app:layout_constraintVertical_bias="0.095" />
+
+    <TextView
+        android:id="@+id/p1Life"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:text="HP"
+        app:layout_constraintBottom_toBottomOf="@+id/txtOne"
+        app:layout_constraintStart_toEndOf="@+id/txtOne"
+        app:layout_constraintTop_toTopOf="@+id/txtOne" />
+
+    <TextView
+        android:id="@+id/p2Life"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:text="HP"
+        app:layout_constraintBottom_toBottomOf="@+id/txtTwo"
+        app:layout_constraintStart_toEndOf="@+id/txtTwo"
+        app:layout_constraintTop_toTopOf="@+id/txtTwo" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

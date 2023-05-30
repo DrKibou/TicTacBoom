@@ -2,7 +2,9 @@ package com.example.tictactoe.VsPlayer;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
+import android.graphics.Color;
 import android.graphics.Typeface;
 import android.media.Image;
 import android.os.Bundle;
@@ -10,6 +12,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.tictactoe.Home;
 import com.example.tictactoe.R;
@@ -24,13 +27,14 @@ public class VsPlayer extends AppCompatActivity {
 
     Button btnBack, btnReset, btnNewGame;
 
-    TextView playerOneName, playerTwoName, txtWinner, scorep1, scorep2;
+    TextView playerOneName, playerTwoName, txtWinner, scorep1, scorep2, p1Life, p2Life;
 
     List<int[]> combinations = new ArrayList<>();
     int [] boxpos = {  0,0,0,
                         0,0,0,
                         0,0,0};
     boolean isGameActive = true;
+    boolean GameWin = false;
 
     int playerTurn = 1;
     int totalSelectedBox = 1;
@@ -39,14 +43,15 @@ public class VsPlayer extends AppCompatActivity {
     Random random;
     List<Integer> explodingTiles = new ArrayList<>();
 
-
+    Player p1 = new Player();
+    Player p2 = new Player();
 
     // check if tile is empty or not
     public boolean isBoxNotEmpty(int boxPosition){
 
         boolean result = false;
 
-        if(boxpos[boxPosition] == 0){
+        if(boxpos[boxPosition] == 0 || boxpos[boxPosition]==3){
             result = true;
         } else {
             isGameActive = false;
@@ -61,8 +66,10 @@ public class VsPlayer extends AppCompatActivity {
         if (explodingTiles.contains(selectedboxPos)) {
 
             // this will explode the tile
-            imageView.setImageResource(R.drawable.explosion);
+            imageView.setImageResource(R.drawable.bomb);
             if (playerTurn == 1){
+                p1.setHp(p1.getHp()-1);
+                p1Life.setText("HP: " + p1.getHp());
                 changeTurn(2);
                 totalSelectedBox++;
                 if(totalSelectedBox == 10){
@@ -70,6 +77,8 @@ public class VsPlayer extends AppCompatActivity {
                     isGameActive = false;
                 }
             } else if (playerTurn == 2){
+                p2.setHp(p2.getHp()-1);
+                p2Life.setText("HP: " + p2.getHp());
                 changeTurn(1);
                 totalSelectedBox++;
                 if(totalSelectedBox == 10){
@@ -78,17 +87,23 @@ public class VsPlayer extends AppCompatActivity {
                 }
             }
         } else {
-
             boxpos[selectedboxPos] = playerTurn;
 
             if (playerTurn == 1) {
-                imageView.setImageResource(R.drawable.x);
+                imageView.setImageResource(R.drawable.x_colored);
                 if (checkWinner()) {
                     txtWinner.setText(playerOneName.getText().toString() + " " + "has won");
                     scoreCounter1++;
                     scorep1.setText("Score " +scoreCounter1);
-                    if(scoreCounter1 == 5){
+                    Toast.makeText(this, "Tap 'Reset' to begin next match.", Toast.LENGTH_SHORT).show();
+                    if(scoreCounter1 == 3){
                         txtWinner.setText(playerOneName.getText().toString() + "Your are the Winner!");
+                        Toast.makeText(this, "Tap 'NEW GAME' to begin New Game.", Toast.LENGTH_SHORT).show();
+                        btnReset.setEnabled(false);
+                    } else if(p2.getHp()==0){
+                        txtWinner.setText(playerOneName.getText().toString() + "Your are the Winner!");
+                        Toast.makeText(this, "Tap 'NEW GAME' to begin New Game.", Toast.LENGTH_SHORT).show();
+                        btnReset.setEnabled(false);
                     }
                     isGameActive = false;
                 } else if (totalSelectedBox == 9) {
@@ -99,14 +114,21 @@ public class VsPlayer extends AppCompatActivity {
                     totalSelectedBox++;
                 }
             } else {
-                imageView.setImageResource(R.drawable.o);
+                imageView.setImageResource(R.drawable.o_colored);
 
                 if (checkWinner()) {
                     txtWinner.setText(playerTwoName.getText().toString() + " " + "has won");
                     scoreCounter2++;
                     scorep2.setText("Score " +scoreCounter2);
-                    if (scoreCounter2 == 5){
+                    Toast.makeText(this, "Tap 'Reset' to begin next match.", Toast.LENGTH_SHORT).show();
+                    if (scoreCounter2 == 3){
                         txtWinner.setText(playerTwoName.getText().toString() + "Your are the Winner!");
+                        Toast.makeText(this, "Tap 'NEW GAME' to begin New Game.", Toast.LENGTH_SHORT).show();
+                        btnReset.setEnabled(false);
+                    } else if(p2.getHp()==0){
+                        txtWinner.setText(playerOneName.getText().toString() + "Your are the Winner!");
+                        Toast.makeText(this, "Tap 'NEW GAME' to begin New Game.", Toast.LENGTH_SHORT).show();
+                        btnReset.setEnabled(false);
                     }
                     isGameActive = false;
                 } else if (totalSelectedBox == 9) {
@@ -122,6 +144,14 @@ public class VsPlayer extends AppCompatActivity {
 
     public boolean checkWinner(){
         boolean result = false;
+
+        if(p1.getHp() == 0){
+            isGameActive = false;
+            result = true;
+        } else if(p2.getHp() == 0){
+            isGameActive = false;
+            result = true;
+        }
 
         for (int i = 0; i < combinations.size();i++){
 
@@ -143,19 +173,48 @@ public class VsPlayer extends AppCompatActivity {
 
             if (playerTurn == 1){
                 playerOneName.setTypeface(null, Typeface.BOLD);
+                playerOneName.setTextColor(Color.WHITE);
+                playerOneName.setBackgroundColor(Color.RED);
                 playerTwoName.setTypeface(null, Typeface.NORMAL);
+                playerTwoName.setTextColor(Color.BLACK);
+                playerTwoName.setBackgroundColor(Color.TRANSPARENT);
             } else {
                 playerTwoName.setTypeface(null, Typeface.BOLD);
+                playerTwoName.setTextColor(Color.WHITE);
+                playerTwoName.setBackgroundColor(Color.BLUE);
                 playerOneName.setTypeface(null, Typeface.NORMAL);
+                playerOneName.setTextColor(Color.BLACK);
+                playerOneName.setBackgroundColor(Color.TRANSPARENT);
             }
     }
+
+    /**void bombTapped(ImageView imageView, int selectedPos, int playerWho){
+
+        if(boxpos[selectedPos] == 3){
+            if (explodingTiles.contains(selectedPos)){
+                if (playerWho == 1){
+                    imageView.setImageResource(R.drawable.bomb);
+                    p1.setHp(p1.getHp()-1);
+
+                } else if (playerWho == 2){
+                    imageView.setImageResource(R.drawable.bomb);
+                    p2.setHp(p2.getHp()-1);
+                }
+            }
+        }
+    }**/
+
     public void resetGame(){
         boxpos = new int[] {0,0,0,0,0,0,0,0,0};
         playerTurn = 1;
         totalSelectedBox = 1;
         txtWinner.setText(" ");
         playerOneName.setTypeface(null, Typeface.BOLD);
+        playerOneName.setTextColor(Color.WHITE);
+        playerOneName.setBackgroundColor(Color.RED);
         playerTwoName.setTypeface(null, Typeface.NORMAL);
+        playerTwoName.setTextColor(Color.BLACK);
+        playerTwoName.setBackgroundColor(Color.TRANSPARENT);
         isGameActive = true;
 
         //this will create a two random tile
@@ -164,19 +223,20 @@ public class VsPlayer extends AppCompatActivity {
         while (explodingTiles.size() < 2) {
             int tile = random.nextInt(9);
             if (!explodingTiles.contains(tile)) {
+                boxpos[tile] = 3;
                 explodingTiles.add(tile);
             }
         }
 
-        ((ImageView) findViewById(R.id.tile1)).setImageResource(0);
-        ((ImageView) findViewById(R.id.tile2)).setImageResource(0);
-        ((ImageView) findViewById(R.id.tile3)).setImageResource(0);
-        ((ImageView) findViewById(R.id.tile4)).setImageResource(0);
-        ((ImageView) findViewById(R.id.tile5)).setImageResource(0);
-        ((ImageView) findViewById(R.id.tile6)).setImageResource(0);
-        ((ImageView) findViewById(R.id.tile7)).setImageResource(0);
-        ((ImageView) findViewById(R.id.tile8)).setImageResource(0);
-        ((ImageView) findViewById(R.id.tile9)).setImageResource(0);
+        ((ImageView) findViewById(R.id.tile1)).setImageResource(R.drawable.empty);
+        ((ImageView) findViewById(R.id.tile2)).setImageResource(R.drawable.empty);
+        ((ImageView) findViewById(R.id.tile3)).setImageResource(R.drawable.empty);
+        ((ImageView) findViewById(R.id.tile4)).setImageResource(R.drawable.empty);
+        ((ImageView) findViewById(R.id.tile5)).setImageResource(R.drawable.empty);
+        ((ImageView) findViewById(R.id.tile6)).setImageResource(R.drawable.empty);
+        ((ImageView) findViewById(R.id.tile7)).setImageResource(R.drawable.empty);
+        ((ImageView) findViewById(R.id.tile8)).setImageResource(R.drawable.empty);
+        ((ImageView) findViewById(R.id.tile9)).setImageResource(R.drawable.empty);
     }
 
     public void newGame(){
@@ -187,8 +247,17 @@ public class VsPlayer extends AppCompatActivity {
         scoreCounter1 = 0;
         txtWinner.setText(" ");
         playerOneName.setTypeface(null, Typeface.BOLD);
+        playerOneName.setTextColor(Color.WHITE);
+        playerOneName.setBackgroundColor(Color.RED);
         playerTwoName.setTypeface(null, Typeface.NORMAL);
+        playerTwoName.setTextColor(Color.BLACK);
+        playerTwoName.setBackgroundColor(Color.TRANSPARENT);
         isGameActive = true;
+        p1.setHp(5);
+        p2.setHp(5);
+        p1Life.setText("HP: " + p1.getHp());
+        p2Life.setText("HP: " + p2.getHp());
+        btnReset.setEnabled(true);
 
         scorep1.setText("Score");
         scorep2.setText("Score");
@@ -198,19 +267,20 @@ public class VsPlayer extends AppCompatActivity {
         while (explodingTiles.size() < 2) {
             int tile = random.nextInt(9);
             if (!explodingTiles.contains(tile)) {
+                boxpos[tile] = 3;
                 explodingTiles.add(tile);
             }
         }
 
-        ((ImageView) findViewById(R.id.tile1)).setImageResource(0);
-        ((ImageView) findViewById(R.id.tile2)).setImageResource(0);
-        ((ImageView) findViewById(R.id.tile3)).setImageResource(0);
-        ((ImageView) findViewById(R.id.tile4)).setImageResource(0);
-        ((ImageView) findViewById(R.id.tile5)).setImageResource(0);
-        ((ImageView) findViewById(R.id.tile6)).setImageResource(0);
-        ((ImageView) findViewById(R.id.tile7)).setImageResource(0);
-        ((ImageView) findViewById(R.id.tile8)).setImageResource(0);
-        ((ImageView) findViewById(R.id.tile9)).setImageResource(0);
+        ((ImageView) findViewById(R.id.tile1)).setImageResource(R.drawable.empty);
+        ((ImageView) findViewById(R.id.tile2)).setImageResource(R.drawable.empty);
+        ((ImageView) findViewById(R.id.tile3)).setImageResource(R.drawable.empty);
+        ((ImageView) findViewById(R.id.tile4)).setImageResource(R.drawable.empty);
+        ((ImageView) findViewById(R.id.tile5)).setImageResource(R.drawable.empty);
+        ((ImageView) findViewById(R.id.tile6)).setImageResource(R.drawable.empty);
+        ((ImageView) findViewById(R.id.tile7)).setImageResource(R.drawable.empty);
+        ((ImageView) findViewById(R.id.tile8)).setImageResource(R.drawable.empty);
+        ((ImageView) findViewById(R.id.tile9)).setImageResource(R.drawable.empty);
     }
 
     @Override
@@ -225,6 +295,8 @@ public class VsPlayer extends AppCompatActivity {
         btnReset = findViewById(R.id.btnReset);
         scorep1 = findViewById(R.id.score1);
         scorep2 = findViewById(R.id.score2);
+        p1Life = findViewById(R.id.p1Life);
+        p2Life = findViewById(R.id.p2Life);
         btnNewGame = findViewById(R.id.btnNewGame);
 
 
@@ -252,6 +324,9 @@ public class VsPlayer extends AppCompatActivity {
 
         playerOneName.setText(p1N);
         playerTwoName.setText(p2N);
+
+        p1.setHp(5);
+        p2.setHp(5);
 
         resetGame();
 
