@@ -31,8 +31,8 @@
 
     <com.google.android.material.textfield.TextInputEditText
         android:id="@+id/plyrOne"
-        android:layout_width="266dp"
-        android:layout_height="40dp"
+        android:layout_width="150dp"
+        android:layout_height="39dp"
         android:layout_marginTop="140dp"
         android:hint="Player One"
         android:maxLines="1"
@@ -43,9 +43,9 @@
 
     <com.google.android.material.textfield.TextInputEditText
         android:id="@+id/plyrTwo"
-        android:layout_width="266dp"
-        android:layout_height="40dp"
-        android:layout_marginTop="12dp"
+        android:layout_width="150dp"
+        android:layout_height="39dp"
+        android:layout_marginTop="48dp"
         android:hint="Player Two"
         android:maxLines="1"
         app:layout_constraintEnd_toEndOf="parent"
@@ -65,6 +65,31 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/plyrTwo"
         app:layout_constraintVertical_bias="0.189" />
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_marginEnd="4dp"
+        app:layout_constraintBottom_toTopOf="@+id/plyrTwo"
+        app:layout_constraintEnd_toStartOf="@+id/plyrOne"
+        app:layout_constraintHorizontal_bias="0.982"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/backBtn"
+        app:layout_constraintVertical_bias="0.867"
+        app:srcCompat="@drawable/x_colored" />
+
+    <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        app:layout_constraintBottom_toTopOf="@+id/startBtn"
+        app:layout_constraintEnd_toStartOf="@+id/plyrTwo"
+        app:layout_constraintHorizontal_bias="0.928"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView"
+        app:layout_constraintVertical_bias="0.225"
+        app:srcCompat="@drawable/o_colored" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

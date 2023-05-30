@@ -94,7 +94,7 @@ public class VsPlayer extends AppCompatActivity {
             if (playerTurn == 1) {
                 if (checkWinner()) {
                     imageView.setImageResource(R.drawable.x_colored);
-                    txtWinner.setText(playerOneName.getText().toString() + " " + "has won!");
+                    txtWinner.setText(playerOneName.getText().toString() + " " + "has Won!");
                     scoreCounter1++;
                     scorep1.setText("Score:" + " " + scoreCounter1);
                     Toast.makeText(this, "Tap 'Reset' to begin next match.", Toast.LENGTH_SHORT).show();
@@ -117,7 +117,7 @@ public class VsPlayer extends AppCompatActivity {
 
                 if (checkWinner()) {
                     imageView.setImageResource(R.drawable.o_colored);
-                    txtWinner.setText(playerTwoName.getText().toString() + " " + "has won");
+                    txtWinner.setText(playerTwoName.getText().toString() + " " + "has Won!");
                     scoreCounter2++;
                     scorep2.setText("Score:" + " " + scoreCounter2);
                     Toast.makeText(this, "Tap 'Reset' to begin next match.", Toast.LENGTH_SHORT).show();
@@ -139,11 +139,11 @@ public class VsPlayer extends AppCompatActivity {
             }
         }
         if (p1.getHp() == 0) {
-            txtWinner.setText(playerTwoName.getText().toString() + "! " + "Your are the Winner!");
+            txtWinner.setText(playerTwoName.getText().toString() + "! " + "You're the Winner!");
             btnReset.setEnabled(false);
             isGameActive = false;
         } else if (p2.getHp() == 0) {
-            txtWinner.setText(playerOneName.getText().toString() + "! " + "Your are the Winner!");
+            txtWinner.setText(playerOneName.getText().toString() + "! " + "You're the Winner!");
             btnReset.setEnabled(false);
             isGameActive = false;
         }
@@ -336,9 +336,6 @@ public class VsPlayer extends AppCompatActivity {
 
         p1.setHp(5);
         p2.setHp(5);
-
-        scorep1.setText("Score: 0");
-        scorep2.setText("Score: 0");
 
         resetGame();
 

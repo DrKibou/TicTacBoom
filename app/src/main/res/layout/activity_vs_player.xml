@@ -46,9 +46,9 @@
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/cardView"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.726" />
 
     <ImageButton
         android:id="@+id/btnBack"
@@ -74,8 +74,10 @@
         app:contentPadding="10dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.666"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.573">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -228,9 +230,10 @@
         android:id="@+id/btnReset"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="48dp"
         android:text="Reset"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.507"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/cardView" />
 
@@ -263,21 +266,23 @@
         android:id="@+id/score1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Score"
-        app:layout_constraintEnd_toEndOf="@+id/txtOne"
-        app:layout_constraintHorizontal_bias="0.484"
-        app:layout_constraintStart_toStartOf="@+id/txtOne"
-        app:layout_constraintTop_toBottomOf="@+id/txtOne" />
+        android:layout_marginTop="8dp"
+        android:text="Score: 0"
+        app:layout_constraintEnd_toEndOf="@+id/p1Life"
+        app:layout_constraintHorizontal_bias="0.47"
+        app:layout_constraintStart_toStartOf="@+id/p1Life"
+        app:layout_constraintTop_toBottomOf="@+id/p1Life" />
 
     <TextView
         android:id="@+id/score2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Score"
-        app:layout_constraintEnd_toEndOf="@+id/txtTwo"
-        app:layout_constraintHorizontal_bias="0.527"
-        app:layout_constraintStart_toStartOf="@+id/txtTwo"
-        app:layout_constraintTop_toBottomOf="@+id/txtTwo" />
+        android:layout_marginTop="8dp"
+        android:text="Score: 0"
+        app:layout_constraintEnd_toEndOf="@+id/p2Life"
+        app:layout_constraintHorizontal_bias="0.47"
+        app:layout_constraintStart_toStartOf="@+id/p2Life"
+        app:layout_constraintTop_toBottomOf="@+id/p2Life" />
 
     <Button
         android:id="@+id/btnNewGame"
@@ -286,29 +291,31 @@
         android:text="New Game"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/btnReset"
-        app:layout_constraintHorizontal_bias="0.518"
+        app:layout_constraintHorizontal_bias="0.555"
         app:layout_constraintStart_toStartOf="@+id/btnReset"
         app:layout_constraintTop_toBottomOf="@+id/btnReset"
-        app:layout_constraintVertical_bias="0.095" />
+        app:layout_constraintVertical_bias="0.169" />
 
     <TextView
         android:id="@+id/p1Life"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:text="HP"
-        app:layout_constraintBottom_toBottomOf="@+id/txtOne"
-        app:layout_constraintStart_toEndOf="@+id/txtOne"
-        app:layout_constraintTop_toTopOf="@+id/txtOne" />
+        android:layout_marginTop="4dp"
+        android:text="HP: 5"
+        app:layout_constraintEnd_toEndOf="@+id/txtOne"
+        app:layout_constraintHorizontal_bias="0.487"
+        app:layout_constraintStart_toStartOf="@+id/txtOne"
+        app:layout_constraintTop_toBottomOf="@+id/txtOne" />
 
     <TextView
         android:id="@+id/p2Life"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:text="HP"
-        app:layout_constraintBottom_toBottomOf="@+id/txtTwo"
-        app:layout_constraintStart_toEndOf="@+id/txtTwo"
-        app:layout_constraintTop_toTopOf="@+id/txtTwo" />
+        android:layout_marginStart="4dp"
+        android:text="HP: 5"
+        app:layout_constraintEnd_toEndOf="@+id/txtTwo"
+        app:layout_constraintHorizontal_bias="0.487"
+        app:layout_constraintTop_toBottomOf="@+id/txtTwo"
+        app:layout_constraintStart_toStartOf="@+id/txtTwo"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
