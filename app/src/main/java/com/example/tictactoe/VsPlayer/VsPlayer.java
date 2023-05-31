@@ -107,6 +107,7 @@ public class VsPlayer extends AppCompatActivity {
                 } else if (totalSelectedBox == 9) {
                     imageView.setImageResource(R.drawable.x_colored);
                     txtWinner.setText("Draw");
+                    Toast.makeText(this, "Tap 'Reset' to begin next match.", Toast.LENGTH_SHORT).show();
                     isGameActive = false;
                 } else {
                     imageView.setImageResource(R.drawable.x_colored);
@@ -130,6 +131,7 @@ public class VsPlayer extends AppCompatActivity {
                 } else if (totalSelectedBox == 9) {
                     imageView.setImageResource(R.drawable.o_colored);
                     txtWinner.setText("Draw");
+                    Toast.makeText(this, "Tap 'Reset' to begin next match.", Toast.LENGTH_SHORT).show();
                     isGameActive = false;
                 } else {
                     imageView.setImageResource(R.drawable.o_colored);

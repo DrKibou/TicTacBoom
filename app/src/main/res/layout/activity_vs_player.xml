@@ -11,8 +11,8 @@
 
     <LinearLayout
         android:id="@+id/linearLayout1"
-        android:layout_width="175dp"
-        android:layout_height="63dp"
+        android:layout_width="161dp"
+        android:layout_height="60dp"
         android:background="@drawable/layout_bg"
         android:orientation="vertical"
         app:layout_constraintBottom_toTopOf="@+id/txtWinner"
@@ -58,6 +58,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="HP: 5"
+                android:textColor="#000000"
                 android:textSize="20dp" />
 
             <TextView
@@ -66,14 +67,15 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="20dp"
                 android:text="Score: 0"
+                android:textColor="#000000"
                 android:textSize="20dp" />
         </LinearLayout>
     </LinearLayout>
 
     <LinearLayout
         android:id="@+id/linearLayout2"
-        android:layout_width="186dp"
-        android:layout_height="64dp"
+        android:layout_width="161dp"
+        android:layout_height="60dp"
         android:background="@drawable/layout_bg"
         android:orientation="vertical"
         app:layout_constraintBottom_toTopOf="@+id/txtWinner"
@@ -119,6 +121,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="HP: 5"
+                android:textColor="#000000"
                 android:textSize="20dp" />
 
             <TextView
@@ -127,6 +130,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="20dp"
                 android:text="Score: 0"
+                android:textColor="#000000"
                 android:textSize="20dp" />
         </LinearLayout>
     </LinearLayout>
@@ -174,7 +178,7 @@
         app:layout_constraintHorizontal_bias="0.666"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.573">
+        app:layout_constraintVertical_bias="0.231">
 
         <LinearLayout
             android:layout_width="match_parent"
