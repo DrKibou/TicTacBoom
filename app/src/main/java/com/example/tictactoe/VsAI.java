@@ -337,6 +337,7 @@ public class VsAI extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_vs_ai);
+        getSupportActionBar().hide();
 
         tile1 = (ImageView) findViewById(R.id.tile1);
         tile2 = (ImageView) findViewById(R.id.tile2);

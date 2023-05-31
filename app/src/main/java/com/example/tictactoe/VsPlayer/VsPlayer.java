@@ -296,6 +296,7 @@ public class VsPlayer extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_vs_player);
+        getSupportActionBar().hide();
 
         playerOneName = findViewById(R.id.txtOne);
         playerTwoName = findViewById(R.id.txtTwo);

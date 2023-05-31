@@ -25,6 +25,7 @@ public class AddPlayers extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_players);
+        getSupportActionBar().hide();
 
         playerOne = findViewById(R.id.plyrOne);
         playerTwo = findViewById(R.id.plyrTwo);
