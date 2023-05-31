@@ -17,8 +17,7 @@ import com.google.android.material.textfield.TextInputEditText;
 public class AddPlayers extends AppCompatActivity {
 
     TextInputEditText playerOne, playerTwo;
-    Button startBtn;
-    ImageButton btnBack;
+    ImageButton btnBack, startBtn;
     String getPlayerOne, getPlayerTwo;
 
 
@@ -39,8 +38,12 @@ public class AddPlayers extends AppCompatActivity {
                 getPlayerOne = playerOne.getText().toString();
                 getPlayerTwo = playerTwo.getText().toString();
 
-                if(getPlayerOne.isEmpty() && getPlayerTwo.isEmpty()){
-                    Toast.makeText(AddPlayers.this, "Please enter your names", Toast.LENGTH_SHORT).show();
+                if (getPlayerOne.isEmpty() && getPlayerTwo.isEmpty()) {
+                    Toast.makeText(AddPlayers.this, "Please enter players name", Toast.LENGTH_SHORT).show();
+                } else if (getPlayerOne.isEmpty()) {
+                    Toast.makeText(AddPlayers.this, "Please enter player one name", Toast.LENGTH_SHORT).show();
+                } else if (getPlayerTwo.isEmpty()) {
+                    Toast.makeText(AddPlayers.this, "Please enter player two name", Toast.LENGTH_SHORT).show();
                 } else {
                     openMulti();
                 }
@@ -55,14 +58,15 @@ public class AddPlayers extends AppCompatActivity {
         });
     }
 
-    public void openMulti(){
+    public void openMulti() {
         Intent intent = new Intent(getApplicationContext(), VsPlayer.class);
         intent.putExtra("playerone", getPlayerOne);
         intent.putExtra("playertwo", getPlayerTwo);
         startActivity(intent);
         finish();
     }
-    public void openHome(){
+
+    public void openHome() {
         Intent intent = new Intent(getApplicationContext(), Home.class);
         startActivity(intent);
         finish();

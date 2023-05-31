@@ -26,7 +26,7 @@ public class VsPlayer extends AppCompatActivity {
 
     ImageView tile1, tile2, tile3, tile4, tile5, tile6, tile7, tile8, tile9;
 
-    Button btnReset, btnNewGame;
+    ImageButton btnReset, btnNewGame;
     ImageButton btnBack;
 
     TextView playerOneName, playerTwoName, txtWinner, scorep1, scorep2, p1Life, p2Life;

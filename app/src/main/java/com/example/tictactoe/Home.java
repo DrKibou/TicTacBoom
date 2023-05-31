@@ -6,20 +6,21 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 
 import com.example.tictactoe.VsPlayer.AddPlayers;
 
 public class Home extends AppCompatActivity {
 
-    Button mpBtn, aiBtn;
+    ImageButton mpBtn, aiBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
 
-        mpBtn = (Button) findViewById(R.id.mpBtn);
-        aiBtn = (Button) findViewById(R.id.aiBtn);
+        mpBtn = (ImageButton) findViewById(R.id.mpBtn);
+        aiBtn = (ImageButton) findViewById(R.id.aiBtn);
 
         mpBtn.setOnClickListener(new View.OnClickListener() {
             @Override

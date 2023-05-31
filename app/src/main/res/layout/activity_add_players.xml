@@ -4,16 +4,17 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/smoke"
     tools:context=".VsPlayer.AddPlayers">
 
     <ImageButton
         android:id="@+id/backBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="32dp"
-        android:src = "@drawable/arrow_back"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="24dp"
         android:backgroundTint="@color/transparent"
+        android:src="@drawable/arrow_back"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -23,7 +24,8 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="160dp"
         android:text="Enter Players Name"
-        android:textSize="20dp"
+        android:textStyle="italic"
+        android:textSize="30dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
@@ -33,11 +35,11 @@
         android:id="@+id/plyrOne"
         android:layout_width="150dp"
         android:layout_height="39dp"
-        android:layout_marginTop="140dp"
+        android:layout_marginTop="136dp"
         android:hint="Player One"
         android:maxLines="1"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintHorizontal_bias="0.616"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView"></com.google.android.material.textfield.TextInputEditText>
 
@@ -45,26 +47,27 @@
         android:id="@+id/plyrTwo"
         android:layout_width="150dp"
         android:layout_height="39dp"
-        android:layout_marginTop="48dp"
+        android:layout_marginTop="44dp"
         android:hint="Player Two"
         android:maxLines="1"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.496"
+        app:layout_constraintHorizontal_bias="0.616"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/plyrOne"></com.google.android.material.textfield.TextInputEditText>
 
-    <Button
+    <ImageButton
         android:id="@+id/startBtn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="343dp"
+        android:layout_height="85dp"
         android:layout_marginTop="32dp"
-        android:text="Start"
+        android:background="#00000000"
+        android:scaleType="fitCenter"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/plyrTwo"
-        app:layout_constraintVertical_bias="0.189" />
+        app:layout_constraintVertical_bias="0.29"
+        app:srcCompat="@drawable/btnstart" />
 
     <ImageView
         android:id="@+id/imageView"

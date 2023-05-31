@@ -5,7 +5,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -14,8 +13,7 @@ public class VsAI extends AppCompatActivity {
 
     ImageView tile1, tile2, tile3, tile4, tile5, tile6, tile7, tile8, tile9;
     TextView txtCurrentTurn;
-    Button btnReset;
-    ImageButton btnBack;
+    ImageButton btnBack, btnReset;
 
     char player = 'x';
     char computer = 'o';
@@ -281,15 +279,15 @@ public class VsAI extends AppCompatActivity {
             case 0:
                 switch(col){
                     case 0:
-                        tile1.setImageResource(R.drawable.o);
+                        tile1.setImageResource(R.drawable.o_colored);
                         gameBoard[row][col] = 'o';
                     break;
                     case 1:
-                        tile2.setImageResource(R.drawable.o);
+                        tile2.setImageResource(R.drawable.o_colored);
                         gameBoard[row][col] = 'o';
                     break;
                     case 2:
-                        tile3.setImageResource(R.drawable.o);
+                        tile3.setImageResource(R.drawable.o_colored);
                         gameBoard[row][col] = 'o';
                     break;
                 }
@@ -297,15 +295,15 @@ public class VsAI extends AppCompatActivity {
             case 1:
                 switch(col){
                     case 0:
-                        tile4.setImageResource(R.drawable.o);
+                        tile4.setImageResource(R.drawable.o_colored);
                         gameBoard[row][col] = 'o';
                         break;
                     case 1:
-                        tile5.setImageResource(R.drawable.o);
+                        tile5.setImageResource(R.drawable.o_colored);
                         gameBoard[row][col] = 'o';
                         break;
                     case 2:
-                        tile6.setImageResource(R.drawable.o);
+                        tile6.setImageResource(R.drawable.o_colored);
                         gameBoard[row][col] = 'o';
                         break;
                 }
@@ -313,15 +311,15 @@ public class VsAI extends AppCompatActivity {
             case 2:
                 switch(col){
                     case 0:
-                        tile7.setImageResource(R.drawable.o);
+                        tile7.setImageResource(R.drawable.o_colored);
                         gameBoard[row][col] = 'o';
                         break;
                     case 1:
-                        tile8.setImageResource(R.drawable.o);
+                        tile8.setImageResource(R.drawable.o_colored);
                         gameBoard[row][col] = 'o';
                         break;
                     case 2:
-                        tile9.setImageResource(R.drawable.o);
+                        tile9.setImageResource(R.drawable.o_colored);
                         gameBoard[row][col] = 'o';
                         break;
                 }
@@ -353,7 +351,7 @@ public class VsAI extends AppCompatActivity {
         txtCurrentTurn = (TextView) findViewById(R.id.txtCurrentTurn);
 
         btnBack = (ImageButton) findViewById(R.id.btnBack);
-        btnReset = (Button) findViewById(R.id.btnReset);
+        btnReset = (ImageButton) findViewById(R.id.btnReset);
 
         newGame();
 
@@ -375,7 +373,7 @@ public class VsAI extends AppCompatActivity {
             public void onClick(View view) {
                 if(isGameActive){
                     if(gameBoard[0][0] == '_'){
-                        tile1.setImageResource(R.drawable.x);
+                        tile1.setImageResource(R.drawable.x_colored);
                         gameBoard[0][0] = 'x';
                         move comp = findBestMove(gameBoard);
                         compMove(comp.row, comp.col);
@@ -389,7 +387,7 @@ public class VsAI extends AppCompatActivity {
             public void onClick(View view) {
                 if(isGameActive){
                     if(gameBoard[0][1] == '_'){
-                        tile2.setImageResource(R.drawable.x);
+                        tile2.setImageResource(R.drawable.x_colored);
                         gameBoard[0][1] = 'x';
                         move comp = findBestMove(gameBoard);
                         compMove(comp.row, comp.col);
@@ -403,7 +401,7 @@ public class VsAI extends AppCompatActivity {
             public void onClick(View view) {
                 if(isGameActive){
                     if(gameBoard[0][2] == '_'){
-                        tile3.setImageResource(R.drawable.x);
+                        tile3.setImageResource(R.drawable.x_colored);
                         gameBoard[0][2] = 'x';
                         move comp = findBestMove(gameBoard);
                         compMove(comp.row, comp.col);
@@ -417,7 +415,7 @@ public class VsAI extends AppCompatActivity {
             public void onClick(View view) {
                 if(isGameActive){
                     if(gameBoard[1][0] == '_'){
-                        tile4.setImageResource(R.drawable.x);
+                        tile4.setImageResource(R.drawable.x_colored);
                         gameBoard[1][0] = 'x';
                         move comp = findBestMove(gameBoard);
                         compMove(comp.row, comp.col);
@@ -431,7 +429,7 @@ public class VsAI extends AppCompatActivity {
             public void onClick(View view) {
                 if(isGameActive){
                     if(gameBoard[1][1] == '_'){
-                        tile5.setImageResource(R.drawable.x);
+                        tile5.setImageResource(R.drawable.x_colored);
                         gameBoard[1][1] = 'x';
                         move comp = findBestMove(gameBoard);
                         compMove(comp.row, comp.col);
@@ -445,7 +443,7 @@ public class VsAI extends AppCompatActivity {
             public void onClick(View view) {
                 if(isGameActive){
                     if(gameBoard[1][2] == '_'){
-                        tile6.setImageResource(R.drawable.x);
+                        tile6.setImageResource(R.drawable.x_colored);
                         gameBoard[1][2] = 'x';
                         move comp = findBestMove(gameBoard);
                         compMove(comp.row, comp.col);
@@ -459,7 +457,7 @@ public class VsAI extends AppCompatActivity {
             public void onClick(View view) {
                 if(isGameActive){
                     if(gameBoard[2][0] == '_'){
-                        tile7.setImageResource(R.drawable.x);
+                        tile7.setImageResource(R.drawable.x_colored);
                         gameBoard[2][0] = 'x';
                         move comp = findBestMove(gameBoard);
                         compMove(comp.row, comp.col);
@@ -473,7 +471,7 @@ public class VsAI extends AppCompatActivity {
             public void onClick(View view) {
                 if(isGameActive){
                     if(gameBoard[2][1] == '_'){
-                        tile8.setImageResource(R.drawable.x);
+                        tile8.setImageResource(R.drawable.x_colored);
                         gameBoard[2][1] = 'x';
                         move comp = findBestMove(gameBoard);
                         compMove(comp.row, comp.col);
@@ -487,7 +485,7 @@ public class VsAI extends AppCompatActivity {
             public void onClick(View view) {
                 if(isGameActive){
                     if(gameBoard[2][2] == '_'){
-                        tile9.setImageResource(R.drawable.x);
+                        tile9.setImageResource(R.drawable.x_colored);
                         gameBoard[2][2] = 'x';
                         move comp = findBestMove(gameBoard);
                         compMove(comp.row, comp.col);
