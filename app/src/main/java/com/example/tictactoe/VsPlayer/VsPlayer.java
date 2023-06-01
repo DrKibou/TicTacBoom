@@ -1,6 +1,7 @@
 package com.example.tictactoe.VsPlayer;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.cardview.widget.CardView;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
@@ -12,6 +13,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -25,6 +27,8 @@ import java.util.Random;
 public class VsPlayer extends AppCompatActivity {
 
     ImageView tile1, tile2, tile3, tile4, tile5, tile6, tile7, tile8, tile9;
+    LinearLayout p1Board, p2Board;
+    CardView p2BoardHolder, p1BoardHolder;
 
     ImageButton btnReset, btnNewGame;
     ImageButton btnBack;
@@ -179,18 +183,14 @@ public class VsPlayer extends AppCompatActivity {
 
         if (playerTurn == 1) {
             playerOneName.setTypeface(null, Typeface.BOLD);
-            playerOneName.setTextColor(Color.WHITE);
-            playerOneName.setBackgroundColor(Color.RED);
+            p1BoardHolder.setCardBackgroundColor(Color.parseColor("#ED4C67"));
             playerTwoName.setTypeface(null, Typeface.NORMAL);
-            playerTwoName.setTextColor(Color.BLACK);
-            playerTwoName.setBackgroundColor(Color.TRANSPARENT);
+            p2BoardHolder.setCardBackgroundColor(Color.parseColor("#800652DD"));
         } else {
             playerTwoName.setTypeface(null, Typeface.BOLD);
-            playerTwoName.setTextColor(Color.WHITE);
-            playerTwoName.setBackgroundColor(Color.BLUE);
+            p2BoardHolder.setCardBackgroundColor(Color.parseColor("#0652DD"));
             playerOneName.setTypeface(null, Typeface.NORMAL);
-            playerOneName.setTextColor(Color.BLACK);
-            playerOneName.setBackgroundColor(Color.TRANSPARENT);
+            p1BoardHolder.setCardBackgroundColor(Color.parseColor("#80ED4C67"));
         }
     }
 
@@ -218,11 +218,9 @@ public class VsPlayer extends AppCompatActivity {
         totalSelectedBox = 1;
         txtWinner.setText(" ");
         playerOneName.setTypeface(null, Typeface.BOLD);
-        playerOneName.setTextColor(Color.WHITE);
-        playerOneName.setBackgroundColor(Color.RED);
+        p1BoardHolder.setCardBackgroundColor(Color.parseColor("#ED4C67"));
         playerTwoName.setTypeface(null, Typeface.NORMAL);
-        playerTwoName.setTextColor(Color.BLACK);
-        playerTwoName.setBackgroundColor(Color.TRANSPARENT);
+        p2BoardHolder.setCardBackgroundColor(Color.parseColor("#800652DD"));
         isGameActive = true;
         setTileClickable();
 
@@ -268,11 +266,9 @@ public class VsPlayer extends AppCompatActivity {
         scoreCounter1 = 0;
         txtWinner.setText(" ");
         playerOneName.setTypeface(null, Typeface.BOLD);
-        playerOneName.setTextColor(Color.WHITE);
-        playerOneName.setBackgroundColor(Color.RED);
+        p1BoardHolder.setCardBackgroundColor(Color.parseColor("#ED4C67"));
         playerTwoName.setTypeface(null, Typeface.NORMAL);
-        playerTwoName.setTextColor(Color.BLACK);
-        playerTwoName.setBackgroundColor(Color.TRANSPARENT);
+        p2BoardHolder.setCardBackgroundColor(Color.parseColor("#800652DD"));
         isGameActive = true;
         p1.setHp(5);
         p2.setHp(5);
@@ -322,6 +318,10 @@ public class VsPlayer extends AppCompatActivity {
         p2Life = findViewById(R.id.p2Life);
         btnNewGame = findViewById(R.id.btnNewGame);
 
+        p1Board = findViewById(R.id.p1Board);
+        p2Board = findViewById(R.id.p2Board);
+        p1BoardHolder = findViewById(R.id.p1BoardHolder);
+        p2BoardHolder = findViewById(R.id.p2BoardHolder);
 
         tile1 = findViewById(R.id.tile1);
         tile2 = findViewById(R.id.tile2);
