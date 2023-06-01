@@ -55,10 +55,7 @@ public class VsPlayer extends AppCompatActivity {
 
         if (boxpos[boxPosition] == 0 || boxpos[boxPosition] == 3) {
             result = true;
-        } else {
-            isGameActive = false;
         }
-
         return result;
     }
 
@@ -227,6 +224,7 @@ public class VsPlayer extends AppCompatActivity {
         playerTwoName.setTextColor(Color.BLACK);
         playerTwoName.setBackgroundColor(Color.TRANSPARENT);
         isGameActive = true;
+        setTileClickable();
 
         //this will create a two random tile
         random = new Random();
@@ -250,6 +248,18 @@ public class VsPlayer extends AppCompatActivity {
         ((ImageView) findViewById(R.id.tile9)).setImageResource(R.drawable.empty);
     }
 
+    public void setTileClickable(){
+        tile1.setClickable(true);
+        tile2.setClickable(true);
+        tile3.setClickable(true);
+        tile4.setClickable(true);
+        tile5.setClickable(true);
+        tile6.setClickable(true);
+        tile7.setClickable(true);
+        tile8.setClickable(true);
+        tile9.setClickable(true);
+    }
+
     public void newGame() {
         boxpos = new int[]{0, 0, 0, 0, 0, 0, 0, 0, 0};
         playerTurn = 1;
@@ -269,6 +279,7 @@ public class VsPlayer extends AppCompatActivity {
         p1Life.setText("HP: " + p1.getHp());
         p2Life.setText("HP: " + p2.getHp());
         btnReset.setEnabled(true);
+        setTileClickable();
 
         scorep1.setText("Score: 0");
         scorep2.setText("Score: 0");
@@ -370,6 +381,7 @@ public class VsPlayer extends AppCompatActivity {
                 if (isGameActive) {
                     if (isBoxNotEmpty(0)) {
                         performAction((ImageView) v, 0);
+                        tile1.setClickable(false);
                     }
                 }
 
@@ -382,6 +394,7 @@ public class VsPlayer extends AppCompatActivity {
                 if (isGameActive) {
                     if (isBoxNotEmpty(1)) {
                         performAction((ImageView) v, 1);
+                        tile2.setClickable(false);
                     }
                 }
 
@@ -394,6 +407,7 @@ public class VsPlayer extends AppCompatActivity {
                 if (isGameActive) {
                     if (isBoxNotEmpty(2)) {
                         performAction((ImageView) v, 2);
+                        tile3.setClickable(false);
                     }
 
                 }
@@ -406,6 +420,7 @@ public class VsPlayer extends AppCompatActivity {
                 if (isGameActive) {
                     if (isBoxNotEmpty(3)) {
                         performAction((ImageView) v, 3);
+                        tile4.setClickable(false);
                     }
                 }
 
@@ -418,6 +433,7 @@ public class VsPlayer extends AppCompatActivity {
                 if (isGameActive) {
                     if (isBoxNotEmpty(4)) {
                         performAction((ImageView) v, 4);
+                        tile5.setClickable(false);
                     }
                 }
 
@@ -430,6 +446,7 @@ public class VsPlayer extends AppCompatActivity {
                 if (isGameActive) {
                     if (isBoxNotEmpty(5)) {
                         performAction((ImageView) v, 5);
+                        tile6.setClickable(false);
                     }
                 }
 
@@ -441,6 +458,7 @@ public class VsPlayer extends AppCompatActivity {
                 if (isGameActive) {
                     if (isBoxNotEmpty(6)) {
                         performAction((ImageView) v, 6);
+                        tile7.setClickable(false);
                     }
                 }
 
@@ -452,6 +470,7 @@ public class VsPlayer extends AppCompatActivity {
                 if (isGameActive) {
                     if (isBoxNotEmpty(7)) {
                         performAction((ImageView) v, 7);
+                        tile8.setClickable(false);
                     }
                 }
 
@@ -464,6 +483,7 @@ public class VsPlayer extends AppCompatActivity {
                 if (isGameActive) {
                     if (isBoxNotEmpty(8)) {
                         performAction((ImageView) v, 8);
+                        tile9.setClickable(false);
                     }
                 }
             }
