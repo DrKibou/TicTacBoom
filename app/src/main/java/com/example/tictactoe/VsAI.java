@@ -3,6 +3,7 @@ package com.example.tictactoe;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageButton;
@@ -19,9 +20,11 @@ public class VsAI extends AppCompatActivity {
     char computer = 'o';
     char gameBoard[][] = {{'_','_','_'},{'_','_','_'},{'_','_','_'}};
     boolean isGameActive = true;
+    boolean compFirstMove = true;
 
     public void newGame(){
         isGameActive = true;
+        compFirstMove = true;
         for (int i = 0; i < gameBoard.length; i++) {
             for (int j = 0; j < gameBoard.length; j++){
                 gameBoard[i][j] = '_';
@@ -45,14 +48,19 @@ public class VsAI extends AppCompatActivity {
     // check board if there's a winner
     public void checkWinner(char board[][]){
 
+        MediaPlayer won_mediaPlayer = MediaPlayer.create(this, R.raw.wonsound);
+        MediaPlayer draw_mediaPlayer = MediaPlayer.create(this, R.raw.drawsound);
+
         // horizontal
         for(int row = 0; row < board.length; row++){
             if(board[row][0] == board[row][1] && board[row][0] == board[row][2]){
                 if(board[row][0] == 'x'){
                     txtCurrentTurn.setText("Player wins");
+                    won_mediaPlayer.start();
                     isGameActive = false;
                 } else if (board[row][0] == 'o'){
                     txtCurrentTurn.setText("Computer wins");
+                    won_mediaPlayer.start();
                     isGameActive = false;
                 }
             }
@@ -62,9 +70,11 @@ public class VsAI extends AppCompatActivity {
             if(board[0][col] == board[1][col] && board[0][col] == board[2][col]){
                 if(board[0][col] == 'x'){
                     txtCurrentTurn.setText("Player wins");
+                    won_mediaPlayer.start();
                     isGameActive = false;
                 } else if (board[0][col] == 'o'){
                     txtCurrentTurn.setText("Computer wins");
+                    won_mediaPlayer.start();
                     isGameActive = false;
                 }
             }
@@ -73,23 +83,28 @@ public class VsAI extends AppCompatActivity {
         if(board[0][0] == board[1][1] & board[0][0] == board[2][2]){
             if(board[0][0] == 'x'){
                 txtCurrentTurn.setText("Player wins");
+                won_mediaPlayer.start();
                 isGameActive = false;
             } else if(board[0][0] == 'o'){
                 txtCurrentTurn.setText("Computer wins");
+                won_mediaPlayer.start();
                 isGameActive = false;
             }
         }
-        if(board[0][0] == board[1][1] & board[0][0] == board[2][2]){
-            if(board[0][0] == 'x'){
+        if(board[2][0] == board[1][1] & board[2][0] == board[0][2]){
+            if(board[0][2] == 'x'){
                 txtCurrentTurn.setText("Player wins");
+                won_mediaPlayer.start();
                 isGameActive = false;
-            } else if(board[0][0] == 'o'){
+            } else if(board[0][2] == 'o'){
                 txtCurrentTurn.setText("Computer wins");
+                won_mediaPlayer.start();
                 isGameActive = false;
             }
         }
         if(isMovesLeft(gameBoard)==false){
-            txtCurrentTurn.setText("Draw.");
+            txtCurrentTurn.setText("Draw");
+            draw_mediaPlayer.start();
         }
     }
 
@@ -138,13 +153,11 @@ public class VsAI extends AppCompatActivity {
                 return +10;
             else if (b[0][0] == computer)
                 return -10;
-        }
-
-        if (b[0][2] == b[1][1] && b[1][1] == b[2][0])
+        } else if (b[0][2] == b[1][1] && b[1][1] == b[2][0])
         {
-            if (b[0][2] == player)
+            if (b[1][1] == player)
                 return +10;
-            else if (b[0][2] == computer)
+            else if (b[1][1] == computer)
                 return -10;
         }
 
@@ -275,56 +288,66 @@ public class VsAI extends AppCompatActivity {
     }
 
     public void compMove(int row, int col){
-        switch(row){
-            case 0:
-                switch(col){
-                    case 0:
-                        tile1.setImageResource(R.drawable.o_colored);
-                        gameBoard[row][col] = 'o';
+
+        if(gameBoard[1][1]=='_'){
+            if(compFirstMove){
+                tile5.setImageResource(R.drawable.o_colored);
+                gameBoard[1][1] = 'o';
+                compFirstMove =false;
+            }
+        } else {
+            switch(row){
+                case 0:
+                    switch(col){
+                        case 0:
+                            tile1.setImageResource(R.drawable.o_colored);
+                            gameBoard[row][col] = 'o';
+                            break;
+                        case 1:
+                            tile2.setImageResource(R.drawable.o_colored);
+                            gameBoard[row][col] = 'o';
+                            break;
+                        case 2:
+                            tile3.setImageResource(R.drawable.o_colored);
+                            gameBoard[row][col] = 'o';
+                            break;
+                    }
                     break;
-                    case 1:
-                        tile2.setImageResource(R.drawable.o_colored);
-                        gameBoard[row][col] = 'o';
+                case 1:
+                    switch(col){
+                        case 0:
+                            tile4.setImageResource(R.drawable.o_colored);
+                            gameBoard[row][col] = 'o';
+                            break;
+                        case 1:
+                            tile5.setImageResource(R.drawable.o_colored);
+                            gameBoard[row][col] = 'o';
+                            break;
+                        case 2:
+                            tile6.setImageResource(R.drawable.o_colored);
+                            gameBoard[row][col] = 'o';
+                            break;
+                    }
                     break;
-                    case 2:
-                        tile3.setImageResource(R.drawable.o_colored);
-                        gameBoard[row][col] = 'o';
+                case 2:
+                    switch(col){
+                        case 0:
+                            tile7.setImageResource(R.drawable.o_colored);
+                            gameBoard[row][col] = 'o';
+                            break;
+                        case 1:
+                            tile8.setImageResource(R.drawable.o_colored);
+                            gameBoard[row][col] = 'o';
+                            break;
+                        case 2:
+                            tile9.setImageResource(R.drawable.o_colored);
+                            gameBoard[row][col] = 'o';
+                            break;
+                    }
                     break;
-                }
-            break;
-            case 1:
-                switch(col){
-                    case 0:
-                        tile4.setImageResource(R.drawable.o_colored);
-                        gameBoard[row][col] = 'o';
-                        break;
-                    case 1:
-                        tile5.setImageResource(R.drawable.o_colored);
-                        gameBoard[row][col] = 'o';
-                        break;
-                    case 2:
-                        tile6.setImageResource(R.drawable.o_colored);
-                        gameBoard[row][col] = 'o';
-                        break;
-                }
-            break;
-            case 2:
-                switch(col){
-                    case 0:
-                        tile7.setImageResource(R.drawable.o_colored);
-                        gameBoard[row][col] = 'o';
-                        break;
-                    case 1:
-                        tile8.setImageResource(R.drawable.o_colored);
-                        gameBoard[row][col] = 'o';
-                        break;
-                    case 2:
-                        tile9.setImageResource(R.drawable.o_colored);
-                        gameBoard[row][col] = 'o';
-                        break;
-                }
-                break;
+            }
         }
+
     }
 
     public void back2Home(){
@@ -338,6 +361,8 @@ public class VsAI extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_vs_ai);
         getSupportActionBar().hide();
+
+        MediaPlayer pop_mediaPlayer = MediaPlayer.create(this, R.raw.osound);
 
         tile1 = (ImageView) findViewById(R.id.tile1);
         tile2 = (ImageView) findViewById(R.id.tile2);
@@ -375,6 +400,7 @@ public class VsAI extends AppCompatActivity {
                 if(isGameActive){
                     if(gameBoard[0][0] == '_'){
                         tile1.setImageResource(R.drawable.x_colored);
+                        pop_mediaPlayer.start();
                         gameBoard[0][0] = 'x';
                         checkWinner(gameBoard);
                         if(isGameActive){
@@ -392,6 +418,7 @@ public class VsAI extends AppCompatActivity {
                 if(isGameActive){
                     if(gameBoard[0][1] == '_'){
                         tile2.setImageResource(R.drawable.x_colored);
+                        pop_mediaPlayer.start();
                         gameBoard[0][1] = 'x';
                         checkWinner(gameBoard);
                         if(isGameActive){
@@ -410,6 +437,7 @@ public class VsAI extends AppCompatActivity {
                     if(gameBoard[0][2] == '_'){
                         tile3.setImageResource(R.drawable.x_colored);
                         gameBoard[0][2] = 'x';
+                        pop_mediaPlayer.start();
                         checkWinner(gameBoard);
                         if(isGameActive){
                             move comp = findBestMove(gameBoard);
@@ -426,6 +454,7 @@ public class VsAI extends AppCompatActivity {
                 if(isGameActive){
                     if(gameBoard[1][0] == '_'){
                         tile4.setImageResource(R.drawable.x_colored);
+                        pop_mediaPlayer.start();
                         gameBoard[1][0] = 'x';
                         checkWinner(gameBoard);
                         if(isGameActive){
@@ -443,6 +472,7 @@ public class VsAI extends AppCompatActivity {
                 if(isGameActive){
                     if(gameBoard[1][1] == '_'){
                         tile5.setImageResource(R.drawable.x_colored);
+                        pop_mediaPlayer.start();
                         gameBoard[1][1] = 'x';
                         checkWinner(gameBoard);
                         if(isGameActive){
@@ -460,6 +490,7 @@ public class VsAI extends AppCompatActivity {
                 if(isGameActive){
                     if(gameBoard[1][2] == '_'){
                         tile6.setImageResource(R.drawable.x_colored);
+                        pop_mediaPlayer.start();
                         gameBoard[1][2] = 'x';
                         checkWinner(gameBoard);
                         if(isGameActive){
@@ -477,6 +508,7 @@ public class VsAI extends AppCompatActivity {
                 if(isGameActive){
                     if(gameBoard[2][0] == '_'){
                         tile7.setImageResource(R.drawable.x_colored);
+                        pop_mediaPlayer.start();
                         gameBoard[2][0] = 'x';
                         checkWinner(gameBoard);
                         if(isGameActive){
@@ -494,6 +526,7 @@ public class VsAI extends AppCompatActivity {
                 if(isGameActive){
                     if(gameBoard[2][1] == '_'){
                         tile8.setImageResource(R.drawable.x_colored);
+                        pop_mediaPlayer.start();
                         gameBoard[2][1] = 'x';
                         checkWinner(gameBoard);
                         if(isGameActive){
@@ -511,6 +544,7 @@ public class VsAI extends AppCompatActivity {
                 if(isGameActive){
                     if(gameBoard[2][2] == '_'){
                         tile9.setImageResource(R.drawable.x_colored);
+                        pop_mediaPlayer.start();
                         gameBoard[2][2] = 'x';
                         checkWinner(gameBoard);
                         if(isGameActive){
