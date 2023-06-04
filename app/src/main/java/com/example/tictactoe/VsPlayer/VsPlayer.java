@@ -86,6 +86,7 @@ public class VsPlayer extends AppCompatActivity {
                 totalSelectedBox++;
                 if (totalSelectedBox == 10) {
                     txtWinner.setText("Draw");
+                    btnReset.setEnabled(true);
                     draw_mediaPlayer.start();
                     isGameActive = false;
                 }
@@ -97,6 +98,7 @@ public class VsPlayer extends AppCompatActivity {
                 totalSelectedBox++;
                 if (totalSelectedBox == 10) {
                     txtWinner.setText("Draw");
+                    btnReset.setEnabled(true);
                     draw_mediaPlayer.start();
                     isGameActive = false;
                 }
@@ -109,6 +111,7 @@ public class VsPlayer extends AppCompatActivity {
                     imageView.setImageResource(R.drawable.x_colored);
                     x_mediaPlayer.start();
                     txtWinner.setText(playerOneName.getText().toString() + " " + "has Won!");
+                    btnReset.setEnabled(true);
                     won_mediaPlayer.start();
                     scoreCounter1++;
                     scorep1.setText("Score:" + " " + scoreCounter1);
@@ -121,6 +124,7 @@ public class VsPlayer extends AppCompatActivity {
                     isGameActive = false;
                 } else if (totalSelectedBox == 9) {
                     imageView.setImageResource(R.drawable.x_colored);
+                    btnReset.setEnabled(true);
                     x_mediaPlayer.start();
                     txtWinner.setText("Draw");
                     draw_mediaPlayer.start();
@@ -138,6 +142,7 @@ public class VsPlayer extends AppCompatActivity {
                     imageView.setImageResource(R.drawable.o_colored);
                     o_mediaPlayer.start();
                     txtWinner.setText(playerTwoName.getText().toString() + " " + "has Won!");
+                    btnReset.setEnabled(true);
                     won_mediaPlayer.start();
                     scoreCounter2++;
                     scorep2.setText("Score:" + " " + scoreCounter2);
@@ -150,6 +155,7 @@ public class VsPlayer extends AppCompatActivity {
                     isGameActive = false;
                 } else if (totalSelectedBox == 9) {
                     imageView.setImageResource(R.drawable.o_colored);
+                    btnReset.setEnabled(true);
                     o_mediaPlayer.start();
                     txtWinner.setText("Draw");
                     draw_mediaPlayer.start();
@@ -341,8 +347,6 @@ public class VsPlayer extends AppCompatActivity {
         p1Life = findViewById(R.id.p1Life);
         p2Life = findViewById(R.id.p2Life);
         btnNewGame = findViewById(R.id.btnNewGame);
-        
-        MediaPlayer o_mediaPlayer = MediaPlayer.create(this, R.raw.osound);
 
         p1Board = findViewById(R.id.p1Board);
         p2Board = findViewById(R.id.p2Board);
@@ -377,7 +381,9 @@ public class VsPlayer extends AppCompatActivity {
         p1.setHp(5);
         p2.setHp(5);
 
-        resetGame();
+
+        newGame();
+        btnReset.setEnabled(false);
 
         btnNewGame.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -399,6 +405,7 @@ public class VsPlayer extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 resetGame();
+                btnReset.setEnabled(false);
             }
         });
         tile1.setOnClickListener(new View.OnClickListener() {
