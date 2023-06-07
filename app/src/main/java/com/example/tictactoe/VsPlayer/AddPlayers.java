@@ -1,13 +1,17 @@
 package com.example.tictactoe.VsPlayer;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.SwitchCompat;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.Switch;
 import android.widget.Toast;
 
 import com.example.tictactoe.Home;
@@ -19,6 +23,7 @@ public class AddPlayers extends AppCompatActivity {
     TextInputEditText playerOne, playerTwo;
     ImageButton btnBack, startBtn;
     String getPlayerOne, getPlayerTwo;
+    SwitchCompat switchMode;
 
 
     @Override
@@ -31,7 +36,7 @@ public class AddPlayers extends AppCompatActivity {
         playerTwo = findViewById(R.id.plyrTwo);
         startBtn = findViewById(R.id.startBtn);
         btnBack = findViewById(R.id.backBtn);
-
+        switchMode = findViewById(R.id.switch_id);
 
         startBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -46,7 +51,11 @@ public class AddPlayers extends AppCompatActivity {
                 } else if (getPlayerTwo.isEmpty()) {
                     Toast.makeText(AddPlayers.this, "Please enter player two name", Toast.LENGTH_SHORT).show();
                 } else {
-                    openMulti();
+                    if(switchMode.isChecked()){
+                        redirectActivity(AddPlayers.this,VsPlayer.class);
+                    }else{
+                        redirectActivity(AddPlayers.this,VsPlayerClassic.class);
+                    }
                 }
             }
         });
@@ -58,14 +67,15 @@ public class AddPlayers extends AppCompatActivity {
             }
         });
     }
-
-    public void openMulti() {
-        Intent intent = new Intent(getApplicationContext(), VsPlayer.class);
+    public void redirectActivity(Activity activity, Class secondActivity) {
+        Intent intent = new Intent(activity, secondActivity);
         intent.putExtra("playerone", getPlayerOne);
         intent.putExtra("playertwo", getPlayerTwo);
-        startActivity(intent);
-        finish();
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        activity.startActivity(intent);
+        activity.finish();
     }
+
 
     public void openHome() {
         Intent intent = new Intent(getApplicationContext(), Home.class);

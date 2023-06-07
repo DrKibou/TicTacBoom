@@ -55,6 +55,23 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/plyrOne"></com.google.android.material.textfield.TextInputEditText>
 
+
+    <androidx.appcompat.widget.SwitchCompat
+        android:id="@+id/switch_id"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textOff=" Classic "
+        android:textOn="Bomb"
+        android:thumb="@drawable/thumb"
+        app:layout_constraintBottom_toTopOf="@+id/startBtn"
+        app:layout_constraintEnd_toEndOf="@+id/plyrTwo"
+        app:layout_constraintHorizontal_bias="0.531"
+        app:layout_constraintStart_toStartOf="@+id/imageView2"
+        app:layout_constraintTop_toBottomOf="@+id/plyrTwo"
+        app:layout_constraintVertical_bias="0.712"
+        app:showText="true"
+        app:track="@drawable/track" />
+
     <ImageButton
         android:id="@+id/startBtn"
         android:layout_width="343dp"

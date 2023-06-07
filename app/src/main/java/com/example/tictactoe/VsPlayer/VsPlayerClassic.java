@@ -1,8 +1,5 @@
 package com.example.tictactoe.VsPlayer;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.cardview.widget.CardView;
-
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.Typeface;
@@ -15,13 +12,16 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.cardview.widget.CardView;
+
 import com.example.tictactoe.R;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-public class VsPlayer extends AppCompatActivity {
+public class VsPlayerClassic extends AppCompatActivity {
 
     ImageView tile1, tile2, tile3, tile4, tile5, tile6, tile7, tile8, tile9;
     LinearLayout p1Board, p2Board;
@@ -30,21 +30,18 @@ public class VsPlayer extends AppCompatActivity {
     ImageButton btnReset, btnNewGame;
     ImageButton btnBack;
 
-    TextView playerOneName, playerTwoName, txtWinner, scorep1, scorep2, p1Life, p2Life;
+    TextView playerOneName, playerTwoName, txtWinner, scorep1, scorep2;
 
     List<int[]> combinations = new ArrayList<>();
     int[] boxpos = {0, 0, 0,
             0, 0, 0,
             0, 0, 0};
     boolean isGameActive = true;
-    boolean GameWin = false;
 
     int playerTurn = 1;
     int totalSelectedBox = 1;
     int scoreCounter1 = 0;
     int scoreCounter2 = 0;
-    Random random;
-    List<Integer> explodingTiles = new ArrayList<>();
 
     Player p1 = new Player();
     Player p2 = new Player();
@@ -54,7 +51,7 @@ public class VsPlayer extends AppCompatActivity {
 
         boolean result = false;
 
-        if (boxpos[boxPosition] == 0 || boxpos[boxPosition] == 3) {
+        if (boxpos[boxPosition] == 0) {
             result = true;
         }
         return result;
@@ -65,45 +62,11 @@ public class VsPlayer extends AppCompatActivity {
 
         MediaPlayer o_mediaPlayer = MediaPlayer.create(this, R.raw.osound);
         MediaPlayer x_mediaPlayer = MediaPlayer.create(this, R.raw.xsound);
-        MediaPlayer bomb_mediaPlayer = MediaPlayer.create(this, R.raw.bombsound);
         MediaPlayer won_mediaPlayer = MediaPlayer.create(this, R.raw.wonsound);
         MediaPlayer winner_mediaPlayer = MediaPlayer.create(this, R.raw.winnersound);
         MediaPlayer draw_mediaPlayer = MediaPlayer.create(this, R.raw.drawsound);
         MediaPlayer hp_mediaPlayer = MediaPlayer.create(this, R.raw.hpsound);
 
-        if (explodingTiles.contains(selectedboxPos)) {
-            // this will explode the tile
-            int bomb = 10;
-            boxpos[selectedboxPos] = bomb;
-            imageView.setImageResource(R.drawable.bomb);
-            bomb_mediaPlayer.start();
-
-            if (playerTurn == 1) {
-                p1.setHp(p1.getHp() - 1);
-                p1Life.setText("HP: " + p1.getHp());
-                hp_mediaPlayer.start();
-                changeTurn(2);
-                totalSelectedBox++;
-                if (totalSelectedBox == 10) {
-                    txtWinner.setText("Draw");
-                    btnReset.setEnabled(true);
-                    draw_mediaPlayer.start();
-                    isGameActive = false;
-                }
-            } else if (playerTurn == 2) {
-                p2.setHp(p2.getHp() - 1);
-                p2Life.setText("HP: " + p2.getHp());
-                hp_mediaPlayer.start();
-                changeTurn(1);
-                totalSelectedBox++;
-                if (totalSelectedBox == 10) {
-                    txtWinner.setText("Draw");
-                    btnReset.setEnabled(true);
-                    draw_mediaPlayer.start();
-                    isGameActive = false;
-                }
-            }
-        } else {
             boxpos[selectedboxPos] = playerTurn;
 
             if (playerTurn == 1) {
@@ -118,8 +81,8 @@ public class VsPlayer extends AppCompatActivity {
                     Toast.makeText(this, "Tap 'Reset' to begin next match.", Toast.LENGTH_SHORT).show();
                     if (scoreCounter1 == 3) {
                         txtWinner.setText(playerOneName.getText().toString() + "! " + "You're the Winner!");
-                        winner_mediaPlayer.start();
                         Toast.makeText(this, "Tap 'NEW GAME' to begin New Game.", Toast.LENGTH_SHORT).show();
+                        winner_mediaPlayer.start();
                         btnReset.setEnabled(false);
                     }
                     isGameActive = false;
@@ -170,30 +133,10 @@ public class VsPlayer extends AppCompatActivity {
                     totalSelectedBox++;
                 }
             }
-        }
-        if (p1.getHp() == 0) {
-            txtWinner.setText(playerTwoName.getText().toString() + "! " + "You're the Winner!");
-            winner_mediaPlayer.start();
-            btnReset.setEnabled(false);
-            isGameActive = false;
-        } else if (p2.getHp() == 0) {
-            txtWinner.setText(playerOneName.getText().toString() + "! " + "You're the Winner!");
-            winner_mediaPlayer.start();
-            btnReset.setEnabled(false);
-            isGameActive = false;
-        }
     }
 
     public boolean checkWinner() {
         boolean result = false;
-
-        if (p1.getHp() == 0) {
-            isGameActive = false;
-            result = true;
-        } else if (p2.getHp() == 0) {
-            isGameActive = false;
-            result = true;
-        }
 
         for (int i = 0; i < combinations.size(); i++) {
 
@@ -257,15 +200,6 @@ public class VsPlayer extends AppCompatActivity {
        /* setTileClickable();*/
 
         //this will create a two random tile
-        random = new Random();
-        explodingTiles.clear();
-        while (explodingTiles.size() < 2) {
-            int tile = random.nextInt(9);
-            if (!explodingTiles.contains(tile)) {
-                boxpos[tile] = 3;
-                explodingTiles.add(tile);
-            }
-        }
 
         ((ImageView) findViewById(R.id.tile1)).setImageResource(R.drawable.empty);
         ((ImageView) findViewById(R.id.tile2)).setImageResource(R.drawable.empty);
@@ -302,25 +236,13 @@ public class VsPlayer extends AppCompatActivity {
         playerTwoName.setTypeface(null, Typeface.NORMAL);
         p2BoardHolder.setCardBackgroundColor(Color.parseColor("#800652DD"));
         isGameActive = true;
-        p1.setHp(5);
-        p2.setHp(5);
-        p1Life.setText("HP: " + p1.getHp());
-        p2Life.setText("HP: " + p2.getHp());
         btnReset.setEnabled(true);
        /* setTileClickable();*/
 
         scorep1.setText("Score: 0");
         scorep2.setText("Score: 0");
+
         //this will create a two random tile
-        random = new Random();
-        explodingTiles.clear();
-        while (explodingTiles.size() < 2) {
-            int tile = random.nextInt(9);
-            if (!explodingTiles.contains(tile)) {
-                boxpos[tile] = 3;
-                explodingTiles.add(tile);
-            }
-        }
 
         ((ImageView) findViewById(R.id.tile1)).setImageResource(R.drawable.empty);
         ((ImageView) findViewById(R.id.tile2)).setImageResource(R.drawable.empty);
@@ -336,7 +258,7 @@ public class VsPlayer extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_vs_player);
+        setContentView(R.layout.activity_vs_player_classic);
         getSupportActionBar().hide();
 
         playerOneName = findViewById(R.id.txtOne);
@@ -346,8 +268,6 @@ public class VsPlayer extends AppCompatActivity {
         btnReset = findViewById(R.id.btnReset);
         scorep1 = findViewById(R.id.score1);
         scorep2 = findViewById(R.id.score2);
-        p1Life = findViewById(R.id.p1Life);
-        p2Life = findViewById(R.id.p2Life);
         btnNewGame = findViewById(R.id.btnNewGame);
 
         p1Board = findViewById(R.id.p1Board);

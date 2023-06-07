@@ -15,6 +15,9 @@
             android:name=".VsPlayer.VsPlayer"
             android:exported="false" />
         <activity
+            android:name=".VsPlayer.VsPlayerClassic"
+            android:exported="false" />
+        <activity
             android:name=".VsPlayer.AddPlayers"
             android:exported="false" />
         <activity
