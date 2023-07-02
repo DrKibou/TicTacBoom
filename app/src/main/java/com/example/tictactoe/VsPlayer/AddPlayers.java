@@ -7,11 +7,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
-import android.widget.CompoundButton;
-import android.widget.EditText;
 import android.widget.ImageButton;
-import android.widget.Switch;
 import android.widget.Toast;
 
 import com.example.tictactoe.Home;
@@ -52,7 +48,7 @@ public class AddPlayers extends AppCompatActivity {
                     Toast.makeText(AddPlayers.this, "Please enter player two name", Toast.LENGTH_SHORT).show();
                 } else {
                     if(switchMode.isChecked()){
-                        redirectActivity(AddPlayers.this,VsPlayer.class);
+                        redirectActivity(AddPlayers.this, VsPlayerBomb.class);
                     }else{
                         redirectActivity(AddPlayers.this,VsPlayerClassic.class);
                     }

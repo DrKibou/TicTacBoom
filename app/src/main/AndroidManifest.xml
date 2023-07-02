@@ -12,7 +12,7 @@
         android:theme="@style/Theme.TicTacToe"
         tools:targetApi="31">
         <activity
-            android:name=".VsPlayer.VsPlayer"
+            android:name=".VsPlayer.VsPlayerBomb"
             android:exported="false" />
         <activity
             android:name=".VsPlayer.VsPlayerClassic"
